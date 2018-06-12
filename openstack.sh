@@ -43,12 +43,10 @@ apt autoremove -y
 
 # Install Snaps
 snap install lxd
-snap install conjure-up --classic --beta
+snap install conjure-up --classic
 
 # Initialize LXD
 cat lxd_preseed.yml | lxd init --preseed
-lxc network set lxdbr0 ipv6.nat false
-lxc network set lxdbr0 ipv6.address none
 
 # Reboot
 reboot
