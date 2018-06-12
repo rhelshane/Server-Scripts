@@ -44,10 +44,10 @@ function configVersion4a()
 function packages()
 {
   echo "Configuring packages"
-  apt remove -qq lxd lxd-client ufw
-  apt update -qq
-  apt full-upgrade -qq
-  apt autoremove -qq
+  apt remove -qq -y lxd lxd-client ufw
+  apt update -qq -y
+  apt full-upgrade -qq -y 
+  apt autoremove -qq -y
 }
 
 # Install Snaps
