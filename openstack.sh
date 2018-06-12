@@ -27,7 +27,7 @@ systemctl mask ufw
 # Configure IPv4
 if [ -e "$INTERFACE" ]
 then 
-  sed "s/^iface.*dhcp.*$/iface\ ens32\ inet\ static/g" $INTERFACE;
+  sed -i "s/^iface.*dhcp.*$/iface\ ens32\ inet\ static/g" $INTERFACE;
   echo "	address $IPADDR" >> $INTERFACE;
   echo "	netmask $NETMASK" >> $INTERFACE;
   echo "	gateway $GATEWAY" >> $INTERFACE;
