@@ -12,6 +12,14 @@ echo "net.ipv6.conf.all.disable_ipv6 = 1" >> /etc/sysctl.conf
 echo "net.ipv6.conf.default.disable_ipv6 = 1" >> /etc/sysctl.conf
 echo "net.ipv6.conf.lo.disable_ipv6 = 1" >> /etc/sysctl.conf
 
+if [ -e "$GRUBCONF" ]
+then
+  sed -i "s/^GRUB_CMDLINE_LINUX=\"\".*$/GRUB_CMDLINE_LINUX=\"ipv6.disable=1\"/g" $GRUBCONF;
+fi
+
+update-grub
+
+
 # Disable Services
 systemctl stop ufw
 systemctl disable ufw
@@ -38,7 +46,6 @@ snap install lxd
 snap install conjure-up --classic
 
 # Initialize LXD
-
 cat lxd_preseed.yml | lxd init --preseed
 
 # Reboot
