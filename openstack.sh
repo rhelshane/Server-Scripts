@@ -42,7 +42,7 @@ apt autoremove -y
 
 # Install Snaps
 snap install lxd
-snap install conjure-up --classic
+snap install conjure-up --classic --edge
 
 # Initialize LXD
 cat lxd_preseed.yml | lxd init --preseed
