@@ -19,7 +19,6 @@ fi
 
 update-grub
 
-
 # Disable Services
 systemctl stop ufw
 systemctl disable ufw
