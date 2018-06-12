@@ -9,40 +9,62 @@ DNSA="1.1.1.1";
 DNSB="8.8.8.8";
 
 # Disable IPv6
-echo "net.ipv6.conf.all.disable_ipv6 = 1" >> /etc/sysctl.conf
-echo "net.ipv6.conf.default.disable_ipv6 = 1" >> /etc/sysctl.conf
-echo "net.ipv6.conf.lo.disable_ipv6 = 1" >> /etc/sysctl.conf
+function disableVersion6()
+{
+  echo "net.ipv6.conf.all.disable_ipv6 = 1" >> /etc/sysctl.conf
+  echo "net.ipv6.conf.default.disable_ipv6 = 1" >> /etc/sysctl.conf
+  echo "net.ipv6.conf.lo.disable_ipv6 = 1" >> /etc/sysctl.conf
+}
 
 # Disable Services
-systemctl stop ufw
-systemctl disable ufw
-systemctl mask ufw
+function disableUFW()
+{
+  systemctl stop ufw
+  systemctl disable ufw
+  systemctl mask ufw
+}
 
 # Configure IPv4
-if [ -e "$INTERFACE" ]
-then 
-  sed -i "s/^iface.*dhcp.*$/iface\ ens32\ inet\ static/g" $INTERFACE;
-  echo "	address $IPADDR" >> $INTERFACE;
-  echo "	netmask $NETMASK" >> $INTERFACE;
-  echo "	gateway $GATEWAY" >> $INTERFACE;
-  echo "	dns-nameservers $DNSA $DNSB" >> $INTERFACE;
-fi
+function configVersion4a()
+{
+  if [ -e "$INTERFACE" ]
+  then 
+    sed -i "s/^iface.*dhcp.*$/iface\ ens32\ inet\ static/g" $INTERFACE;
+    echo "	address $IPADDR" >> $INTERFACE;
+    echo "	netmask $NETMASK" >> $INTERFACE;
+    echo "	gateway $GATEWAY" >> $INTERFACE;
+    echo "	dns-nameservers $DNSA $DNSB" >> $INTERFACE;
+  fi
+}
 
 # Package maintenance
-apt remove -y lxd lxd-client ufw
-apt update -y
-apt full-upgrade -y
-apt autoremove -y
+function packages()
+{
+  apt remove -y lxd lxd-client ufw
+  apt update -y
+  apt full-upgrade -y
+  apt autoremove -y
+}
 
 # Install Snaps
-snap install lxd
-snap install conjure-up --classic
+function snaps()
+{
+  snap install lxd
+  snap install conjure-up --classic
+}
 
 # Initialize LXD
-cat lxd_preseed.yml | lxd init --preseed
+function configLXD()
+{
+  cat lxd_preseed.yml | lxd init --preseed
+}
 
-# Reboot
-reboot
+
+disableVersion6
+disableUFW
+packages
+snaps
+configLXD
 
 
 
