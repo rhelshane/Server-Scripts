@@ -1,6 +1,7 @@
 #!/bin/bash
 
 INTERFACE="/etc/network/interfaces";
+GRUBCONF="/etc/default/grub";
 IPADDR="192.168.192.3";
 NETMASK="255.255.255.0";
 GATEWAY="192.168.192.2";
