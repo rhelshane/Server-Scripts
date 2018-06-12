@@ -54,8 +54,8 @@ function packages()
 function snaps()
 {
   echo "Configuring snaps"
-  snap install lxd -q
-  snap install conjure-up --classic -q
+  snap install lxd
+  snap install conjure-up --classic
 }
 
 # Initialize LXD
