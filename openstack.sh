@@ -11,6 +11,7 @@ DNSB="8.8.8.8";
 # Disable IPv6
 function disableVersion6()
 {
+  echo "Disabling IPv6"
   echo "net.ipv6.conf.all.disable_ipv6 = 1" >> /etc/sysctl.conf
   echo "net.ipv6.conf.default.disable_ipv6 = 1" >> /etc/sysctl.conf
   echo "net.ipv6.conf.lo.disable_ipv6 = 1" >> /etc/sysctl.conf
@@ -19,9 +20,10 @@ function disableVersion6()
 # Disable Services
 function disableUFW()
 {
-  systemctl stop ufw
-  systemctl disable ufw
-  systemctl mask ufw
+  echo "Disabling UFW"
+  systemctl stop ufw --quiet
+  systemctl disable ufw --quiet
+  systemctl mask ufw --quiet
 }
 
 # Configure IPv4
@@ -29,6 +31,7 @@ function configVersion4a()
 {
   if [ -e "$INTERFACE" ]
   then 
+    echo "Configuring IPv4"
     sed -i "s/^iface.*dhcp.*$/iface\ ens32\ inet\ static/g" $INTERFACE;
     echo "	address $IPADDR" >> $INTERFACE;
     echo "	netmask $NETMASK" >> $INTERFACE;
@@ -40,22 +43,25 @@ function configVersion4a()
 # Package maintenance
 function packages()
 {
-  apt remove -y lxd lxd-client ufw
-  apt update -y
-  apt full-upgrade -y
-  apt autoremove -y
+  echo "Configuring packages"
+  apt remove -qq lxd lxd-client ufw
+  apt update -qq
+  apt full-upgrade -qq
+  apt autoremove -qq
 }
 
 # Install Snaps
 function snaps()
 {
-  snap install lxd
-  snap install conjure-up --classic
+  echo "Configuring snaps"
+  snap install lxd -q
+  snap install conjure-up --classic -q
 }
 
 # Initialize LXD
 function configLXD()
 {
+  echo "Configuring LXD"
   cat lxd_preseed.yml | lxd init --preseed
 }
 
