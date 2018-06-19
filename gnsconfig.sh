@@ -31,7 +31,7 @@ function gitPackages()
   cd dynamips
   mkdir build
   cd build
-  cmake ..
+  cmake -DDYNAMIPS_ARCH=x86 ..
   make install
 }
   
