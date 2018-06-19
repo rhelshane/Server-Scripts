@@ -3,6 +3,7 @@
 GNS_CONF="gns3_server.conf"
 GNS_USERNAME="student88"
 GNS_PASSWORD="QAX443z"
+GNS_PORT="3080"
 
 function packageManagement()
 {
@@ -33,6 +34,11 @@ function configGNS()
   sed -i "s/^auth = False.*$/auth = True/" /root/.config/GNS3/$GNS_CONF
   sed -i "s/^user = gns3.*$/user = $GNS_USERNAME/" /root/.config/GNS3/$GNS_CONF
   sed -i "s/^password = gns3.*$/password = $GNS_PASSWORD/" /root/.config/GNS3/$GNS_CONF
+}
+
+function configUFW()
+{
+  sudo ufw allow $GNS_PORT
 }
 
 packageManagement
