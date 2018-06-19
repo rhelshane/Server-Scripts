@@ -30,6 +30,7 @@ function gitPackages()
   git clone git://github.com/GNS3/dynamips
   cd dynamips
   mkdir build
+  cd build
   cmake ..
   make install
 }
