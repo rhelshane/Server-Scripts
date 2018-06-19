@@ -1,0 +1,10 @@
+python-dev
+python3-dev
+python-jsonschema
+python-psutil
+python3-setuptools
+gcc
+libdpkg-perl
+dynamips 
+libpcap-dev
+make
