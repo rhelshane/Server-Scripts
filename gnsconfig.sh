@@ -13,7 +13,7 @@ function packageManagement()
     python-jsonschema python-psutil python3-setuptools \
     gcc libdpkg-perl dynamips libpcap-dev make  
   apt update -y 
-  sudo apt upgrade
+  sudo apt upgrade -y
 }
 
 function gitPackages()
