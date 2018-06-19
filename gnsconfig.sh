@@ -16,7 +16,7 @@ function packageManagement()
 
 function gitPackages()
 {
-  git clone https://github.com/GNS3/gns3-server.git
+  git clone -b 2.1 https://github.com/GNS3/gns3-server.git
   cd gns3-server
   python3 setup.py install
   cd ..
