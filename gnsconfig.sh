@@ -30,7 +30,7 @@ function gitPackages()
 
 function configGNS()
 {
-  mkdir /root/.config
+  mkdir /root/.config/GNS3/
   cp /root/gns3-server/conf/$GNS_CONF /root/.config/GNS3/$GNS_CONF
   sed -i "s/^auth = False.*$/auth = True/" /root/.config/GNS3/$GNS_CONF
   sed -i "s/^user = gns3.*$/user = $GNS_USERNAME/" /root/.config/GNS3/$GNS_CONF
