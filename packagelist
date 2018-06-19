@@ -1,7 +1,0 @@
-python-dev
-python3-dev
-python-jsonschema
-python-psutil
-python3-setuptools
-gcc
-dynamips:i386
