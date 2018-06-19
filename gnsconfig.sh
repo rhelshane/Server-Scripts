@@ -38,7 +38,7 @@ function configGNS()
 
 function configUFW()
 {
-  sudo ufw allow $GNS_PORT
+  ufw allow $GNS_PORT
 }
 
 packageManagement
