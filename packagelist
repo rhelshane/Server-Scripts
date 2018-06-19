@@ -9,3 +9,4 @@ libpcap0.8-dev
 libelf-dev
 libpcap-dev
 make
+cmake
