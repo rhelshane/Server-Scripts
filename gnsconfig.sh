@@ -8,10 +8,10 @@ GNS_PORT="3080"
 function packageManagement()
 {
   apt update -y
-  sudo apt upgrade -y 
-  sudo apt install -y python-dev python3-dev python-jsonschema python-psutil python3-setuptools gcc libdpkg-perl dynamips libpcap-dev make  
+  apt upgrade -y 
+  apt install -y $(cat packagelist)
   apt update -y 
-  sudo apt upgrade -y
+  apt upgrade -y
 }
 
 function gitPackages()
