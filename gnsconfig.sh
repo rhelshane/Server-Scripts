@@ -20,9 +20,17 @@ function gitPackages()
   cd gns3-server
   python3 setup.py install
   cd ..
+  
   git clone https://github.com/GNS3/ubridge.git
   cd ubridge
   make
+  make install
+  cd ..
+  
+  git clone git://github.com/GNS3/dynamips
+  cd dynamips
+  mkdir build
+  cmake ..
   make install
 }
   
