@@ -26,13 +26,6 @@ function gitPackages()
   make
   make install
   cd ..
-  
-  git clone git://github.com/GNS3/dynamips
-  cd dynamips
-  mkdir build
-  cd build
-  cmake -DDYNAMIPS_ARCH=x86 ..
-  make install
 }
   
 function configGNS()
