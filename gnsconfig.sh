@@ -44,3 +44,4 @@ function configUFW()
 packageManagement
 gitPackages
 configGNS
+configUFW
