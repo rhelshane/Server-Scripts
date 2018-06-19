@@ -8,9 +8,9 @@ GNS_PORT="3080"
 function packageManagement()
 {
   apt update -y
-  apt upgrade -y 
+  apt upgrade -y
   apt install -y $(cat packagelist)
-  apt update -y 
+  apt update -y
   apt upgrade -y
 }
 
@@ -25,7 +25,7 @@ function gitPackages()
   make
   make install
 }
-
+  
 function configGNS()
 {
   mkdir -p /root/.config/GNS3/
@@ -33,13 +33,13 @@ function configGNS()
   sed -i "s/^auth = False.*$/auth = True/" /root/.config/GNS3/$GNS_CONF
   sed -i "s/^user = gns3.*$/user = $GNS_USERNAME/" /root/.config/GNS3/$GNS_CONF
   sed -i "s/^password = gns3.*$/password = $GNS_PASSWORD/" /root/.config/GNS3/$GNS_CONF
-}
-
+  }
+  
 function configUFW()
 {
   ufw allow $GNS_PORT
 }
-
+  
 packageManagement
 gitPackages
 configGNS
