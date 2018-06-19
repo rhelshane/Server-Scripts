@@ -4,7 +4,4 @@ python-jsonschema
 python-psutil
 python3-setuptools
 gcc
-libdpkg-perl
-libpcap-dev
-make
-cmake
+dynamips:i386
