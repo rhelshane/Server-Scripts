@@ -9,9 +9,7 @@ function packageManagement()
 {
   apt update -y
   sudo apt upgrade -y 
-  sudo apt install -y python-dev python3-dev \ 
-    python-jsonschema python-psutil python3-setuptools \
-    gcc libdpkg-perl dynamips libpcap-dev make  
+  sudo apt install -y python-dev python3-dev python-jsonschema python-psutil python3-setuptools gcc libdpkg-perl dynamips libpcap-dev make  
   apt update -y 
   sudo apt upgrade -y
 }
