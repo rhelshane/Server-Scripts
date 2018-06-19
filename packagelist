@@ -5,6 +5,7 @@ python-psutil
 python3-setuptools
 gcc
 libdpkg-perl
-dynamips 
+libpcap0.8-dev
+libelf-dev
 libpcap-dev
 make
