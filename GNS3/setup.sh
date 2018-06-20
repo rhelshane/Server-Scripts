@@ -30,10 +30,10 @@ function checkSuccess()
 function installGNS3()
 {
   echo "####### Installing GNS3" | tee -a $LOG_FILE
-  apt-get update -y -q >> $LOG_FILE
-  apt-get upgrade -y -q >> $LOG_FILE
-  apt-get install -y -q $(cat packagelist) >> $LOG_FILE
-  pip3 install -q gns3-server==$GNS_VERS >> $LOG_FILE
+  apt-get update -qq >> $LOG_FILE
+  apt-get upgrade -qq >> $LOG_FILE
+  apt-get install -qq $(cat packagelist) >> $LOG_FILE
+  pip3 install -qq gns3-server==$GNS_VERS >> $LOG_FILE
   checkSuccess gns3server
 }
 
@@ -43,8 +43,8 @@ function installDynamips()
 {
   echo "###### Installing dynamips" | tee -a $LOG_FILE
   dpkg --add-architecture i386 >> $LOG_FILE
-  apt-get update -y -q >> $LOG_FILE
-  apt-get install -y -q dynamips:i386 >> $LOG_FILE
+  apt-get update -qq >> $LOG_FILE
+  apt-get install -qq dynamips:i386 >> $LOG_FILE
   checkSuccess dynamips
 }
 
