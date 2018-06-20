@@ -11,7 +11,7 @@ function installGNS3()
 {
   apt update -y
   apt upgrade -y
-  apt install -y python-pip python3-pip prompt-toolkit
+  apt install -y $(cat packagelist)
   pip3 install gns3-server==2.1.8
 }
 
