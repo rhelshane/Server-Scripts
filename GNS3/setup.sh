@@ -10,6 +10,7 @@ CURRENT_DIR=$(pwd)
 IMAGE_DIR="$HOME/GNS3/Images"
 APPLIANCE_DIR="$HOME/GNS3/Appliances"
 PROJECT_DIR="$HOME/GNS3/Project"
+CONFIG_DIR="$HOME/.config"
 
 GNS_USER="student749"
 GNS_PASS="vVx5611"
@@ -63,7 +64,7 @@ function configUFW()
 # Update the GNS3 config file
 function configureGNS3()
 {
-  mkdir $HOME/GNS3 /root/.config
+  mkdir $HOME/GNS3 $CONFIG_DIR 
   mkdir $IMAGE_DIR $APPLIANCE_DIR $PROJECT_DIR
   sed -i "s/___USER___/$GNS_USER/" GNS3.conf
   sed -i "s/___PASS___/$GNS_PASS/" GNS3.conf	
@@ -71,7 +72,7 @@ function configureGNS3()
   sed -i "s/___IMAGE_DIR___/$IMAGE_DIR/" GNS3.conf
   sed -i "s/___APPLIANCE_DIR___/$APPLIANCE_DIR/" GNS3.conf
   sed -i "s/___PROJECT_DIR___/$PROJECT_DIR/" GNS3.conf
-  cp GNS3.conf $HOME/.config/
+  cp GNS3.conf $CONFIG_DIR
 }
 
 
