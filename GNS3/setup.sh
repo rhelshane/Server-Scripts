@@ -14,7 +14,7 @@ PROJECT_DIR="$HOME/GNS3/Project"
 GNS_USER="student749"
 GNS_PASS="vVx5611"
 GNS_PORT="3082"
-
+SSH_PORT="22"
 
 # Update packages via apt and install gns3-server via pip3
 function installGNS3()
@@ -49,8 +49,7 @@ function installUbridge()
 # Open ports in UFW
 function configUFW()
 {
-
-  ufw allow 22
+  ufw allow $SSH_PORT
   ufw allow $GNS_PORT
   ufw allow 5000:6000/tcp
   ufw allow 5000:6000/udp
