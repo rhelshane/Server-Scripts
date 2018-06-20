@@ -20,6 +20,12 @@ GNS_PORT="3082"
 GNS_VERS="2.1.8"
 SSH_PORT="22"
 
+# Check whether package is installed and in path
+function checkSuccess()
+{
+  which $1 >> /dev/null && echo "Success!"
+} 
+
 # Update packages via apt and install gns3-server via pip3
 function installGNS3()
 {
@@ -28,6 +34,7 @@ function installGNS3()
   apt-get upgrade -y -q >> $LOG_FILE
   apt-get install -y -q $(cat packagelist) >> $LOG_FILE
   pip3 install -q gns3-server==$GNS_VERS >> $LOG_FILE
+  checkSuccess gns3server
 }
 
 
@@ -38,6 +45,7 @@ function installDynamips()
   dpkg --add-architecture i386 >> $LOG_FILE
   apt-get update -y -q >> $LOG_FILE
   apt-get install -y -q dynamips:i386 >> $LOG_FILE
+  checkSuccess dynamips
 }
 
 
@@ -50,6 +58,7 @@ function installUbridge()
   make >> $LOG_FILE
   make install >> $LOG_FILE
   cd $CURRENT_DIR
+  checkSuccess ubridge
 }
 
 
