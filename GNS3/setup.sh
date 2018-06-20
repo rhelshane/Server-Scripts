@@ -57,6 +57,9 @@ function configureGNS3()
   sed -i "s/___USER___/$GNS_USER/" GNS3.conf
   sed -i "s/___PASS___/$GNS_PASS/" GNS3.conf	
   sed -i "s/___PORT___/$GNS_PORT/" GNS3.conf
+  sed -i "s/___IMAGE_DIR___/$IMAGE_DIR/" GNS3.conf
+  sed -i "s/___APPLIANCE_DIR___/$APPLIANCE_DIR/" GNS3.conf
+  sed -i "s/___PROJECT_DIR___/$PROJECT_DIR/" GNS3.conf
   cp GNS3.conf $HOME/.config/
 }
 
