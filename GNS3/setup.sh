@@ -24,9 +24,9 @@ SSH_PORT="22"
 function installGNS3()
 {
   echo "####### Installing GNS3" | tee -a $LOG_FILE
-  apt update -y -q >> $LOG_FILE
-  apt upgrade -y -q >> $LOG_FILE
-  apt install -y -q $(cat packagelist) >> $LOG_FILE
+  apt-get update -y -q >> $LOG_FILE
+  apt-get upgrade -y -q >> $LOG_FILE
+  apt-get install -y -q $(cat packagelist) >> $LOG_FILE
   pip3 install -q gns3-server==$GNS_VERS >> $LOG_FILE
 }
 
@@ -36,8 +36,8 @@ function installDynamips()
 {
   echo "###### Installing dynamips" | tee -a $LOG_FILE
   dpkg --add-architecture i386 >> $LOG_FILE
-  apt update -y -q >> $LOG_FILE
-  apt install -y -q dynamips:i386 >> $LOG_FILE
+  apt-get update -y -q >> $LOG_FILE
+  apt-get install -y -q dynamips:i386 >> $LOG_FILE
 }
 
 
@@ -47,8 +47,8 @@ function installUbridge()
   echo "###### Installing ubridge" | tee -a $LOG_FILE
   git clone -q https://github.com/GNS3/ubridge.git || echo "Error cloning ubridge."
   cd ubridge
-  make
-  make install
+  make >> $LOG_FILE
+  make install >> $LOG_FILE
   cd $CURRENT_DIR
 }
 
