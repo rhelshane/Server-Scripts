@@ -16,6 +16,7 @@ CONFIG_DIR="$HOME/.config"
 GNS_USER="student749"
 GNS_PASS="vVx5611"
 GNS_PORT="3082"
+GNS_VERS="2.1.8"
 SSH_PORT="22"
 
 # Update packages via apt and install gns3-server via pip3
@@ -24,7 +25,7 @@ function installGNS3()
   apt update -y
   apt upgrade -y
   apt install -y $(cat packagelist)
-  pip3 install gns3-server==2.1.8
+  pip3 install gns3-server==$GNS_VERS
 }
 
 
