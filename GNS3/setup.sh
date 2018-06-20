@@ -7,6 +7,7 @@
 
 # Declare variables
 CURRENT_DIR=$(pwd)
+GNS_DIR="$HOME/GNS3"
 IMAGE_DIR="$HOME/GNS3/Images"
 APPLIANCE_DIR="$HOME/GNS3/Appliances"
 PROJECT_DIR="$HOME/GNS3/Project"
@@ -64,8 +65,7 @@ function configUFW()
 # Update the GNS3 config file
 function configureGNS3()
 {
-  mkdir $HOME/GNS3 $CONFIG_DIR 
-  mkdir $IMAGE_DIR $APPLIANCE_DIR $PROJECT_DIR
+  mkdir $GNS_DIR $CONFIG_DIR $IMAGE_DIR $APPLIANCE_DIR $PROJECT_DIR
   sed -i "s/___USER___/$GNS_USER/" GNS3.conf
   sed -i "s/___PASS___/$GNS_PASS/" GNS3.conf	
   sed -i "s/___PORT___/$GNS_PORT/" GNS3.conf
