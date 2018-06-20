@@ -12,6 +12,7 @@ IMAGE_DIR="$HOME/GNS3/Images"
 APPLIANCE_DIR="$HOME/GNS3/Appliances"
 PROJECT_DIR="$HOME/GNS3/Project"
 CONFIG_DIR="$HOME/.config"
+LOG_FILE="install.log"
 
 GNS_USER="student749"
 GNS_PASS="vVx5611"
@@ -22,25 +23,28 @@ SSH_PORT="22"
 # Update packages via apt and install gns3-server via pip3
 function installGNS3()
 {
-  apt update -y -q
-  apt upgrade -y -q
-  apt install -y -q $(cat packagelist)
-  pip3 install -q gns3-server==$GNS_VERS
+  echo "####### Installing GNS3" | tee -a $LOG_FILE
+  apt update -y -q >> $LOG_FILE
+  apt upgrade -y -q >> $LOG_FILE
+  apt install -y -q $(cat packagelist) >> $LOG_FILE
+  pip3 install -q gns3-server==$GNS_VERS >> $LOG_FILE
 }
 
 
 # Install the 32-bit version of dynamips (more stable)
 function installDynamips()
 {
-  dpkg --add-architecture i386
-  apt update -y -q
-  apt install -y -q dynamips:i386
+  echo "###### Installing dynamips" | tee -a $LOG_FILE
+  dpkg --add-architecture i386 >> $LOG_FILE
+  apt update -y -q >> $LOG_FILE
+  apt install -y -q dynamips:i386 >> $LOG_FILE
 }
 
 
 # Clone, build and install ubridge
 function installUbridge()
 {
+  echo "###### Installing ubridge" | tee -a $LOG_FILE
   git clone -q https://github.com/GNS3/ubridge.git || echo "Error cloning ubridge."
   cd ubridge
   make
@@ -52,20 +56,22 @@ function installUbridge()
 # Open ports in UFW
 function configUFW()
 {
-  ufw allow $SSH_PORT
-  ufw allow $GNS_PORT
-  ufw allow 5000:6000/tcp
-  ufw allow 5000:6000/udp
-  ufw allow 10000:11000/tcp
-  ufw allow 10000:11000/udp
-  systemctl enable ufw
-  ufw --force enable
+  echo "###### Configuring UFW" | tee -a $LOG_FILE
+  ufw allow $SSH_PORT >> $LOG_FILE
+  ufw allow $GNS_PORT >> $LOG_FILE
+  ufw allow 5000:6000/tcp >> $LOG_FILE
+  ufw allow 5000:6000/udp >> $LOG_FILE
+  ufw allow 10000:11000/tcp >> $LOG_FILE
+  ufw allow 10000:11000/udp >> $LOG_FILE
+  systemctl enable ufw >> $LOG_FILE
+  ufw --force enable >> $LOG_FILE
 }
 
 
 # Update the GNS3 config file
 function configureGNS3()
 {
+  echo "###### Configuring GNS3" | tee -a $LOG_FILE
   mkdir $GNS_DIR $CONFIG_DIR $IMAGE_DIR $APPLIANCE_DIR $PROJECT_DIR || echo "Error making folders"
   sed -i "s/___USER___/$GNS_USER/" GNS3.conf
   sed -i "s/___PASS___/$GNS_PASS/" GNS3.conf	
