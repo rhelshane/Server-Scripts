@@ -20,6 +20,15 @@ GNS_PORT="3082"
 GNS_VERS="2.1.8"
 SSH_PORT="22"
 
+# Ensure script is run as root user (not a super secure script)
+function checkRoot()
+{
+  if [[ $EUID -ne 0 ]]; then
+    echo "This script must be run as root."
+    exit 1
+  fi
+}
+
 # Check whether package is installed and in path
 function checkSuccess()
 {
@@ -93,6 +102,7 @@ function configureGNS3()
 
 
 # Run the functions 
+checkRoot
 installGNS3
 installDynamips
 installUbridge
