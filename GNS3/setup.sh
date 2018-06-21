@@ -132,6 +132,6 @@ installGNS3
 installDocker
 installDynamips
 installUbridge
-installVPCS
+#installVPCS ## Need to figure out why this doesn't work
 configUFW
 configureGNS3
