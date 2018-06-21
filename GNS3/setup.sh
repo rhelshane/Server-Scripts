@@ -46,7 +46,7 @@ function updatePackages()
   apt-get update -qq >> $LOG_FILE
   apt-get upgrade -qq >> $LOG_FILE
   apt-get install -qq $(cat packagelist) >> $LOG_FILE
-  checkSuccess $(cat packagelist) 
+  dpkg -l $(cat packagelist) &> /dev/null && echo "Success!" 
 }
 
 # Update packages via apt and install gns3-server via pip3
