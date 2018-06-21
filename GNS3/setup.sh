@@ -14,11 +14,13 @@ PROJECT_DIR="$HOME/GNS3/Project"
 CONFIG_DIR="$HOME/.config"
 LOG_FILE="install.log"
 
+
 GNS_USER="student749"
 GNS_PASS="vVx5611"
 GNS_PORT="3082"
 GNS_VERS="2.1.8"
 SSH_PORT="22"
+
 
 # Ensure script is run as root user (not a super secure script)
 function checkRoot()
@@ -29,11 +31,13 @@ function checkRoot()
   fi
 }
 
+
 # Check whether package is installed and in path
 function checkSuccess()
 {
   which $1 >> /dev/null && echo "Success!"
 } 
+
 
 # Update packages via apt and install gns3-server via pip3
 function installGNS3()
@@ -44,6 +48,18 @@ function installGNS3()
   apt-get install -qq $(cat packagelist) >> $LOG_FILE
   pip3 install -qq gns3-server==$GNS_VERS >> $LOG_FILE
   checkSuccess gns3server
+}
+
+
+#Install docker
+function installDocker()
+{
+  echo "###### Installing Docker" | tee -a $LOG_FILE
+  apt-get install -qq docker.io >> $LOG_FILE
+  echo "###### Enabling Docker" | tee -a $LOG_FILE
+  systemctl start docker >> $LOG_FILE
+  systemctl enable docker >> $LOG_FILE
+  checkSuccess docker
 }
 
 
@@ -69,6 +85,15 @@ function installUbridge()
   cd $CURRENT_DIR
   checkSuccess ubridge
 }
+
+
+# Install VPCS
+function installVPCS()
+{
+  echo "###### Installing VPCS" | tee -a $LOG_FILE
+  sudo apt-get install -qq vpcs >> $LOG_FILE
+  checkSuccess vpcs
+} 
 
 
 # Open ports in UFW
@@ -104,7 +129,9 @@ function configureGNS3()
 # Run the functions 
 checkRoot
 installGNS3
+installDocker
 installDynamips
 installUbridge
+installVPCS
 configUFW
 configureGNS3
