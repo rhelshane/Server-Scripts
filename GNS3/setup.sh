@@ -40,13 +40,19 @@ function checkSuccess()
 } 
 
 
+function updatePackages()
+{
+  echo "###### Updating Packages" | tee -a $LOG_FILE
+  apt-get update -qq >> $LOG_FILE
+  apt-get upgrade -qq >> $LOG_FILE
+  apt-get install -qq $(cat packagelist) >> $LOG_FILE
+  checkSuccess $(cat packagelist) 
+}
+
 # Update packages via apt and install gns3-server via pip3
 function installGNS3()
 {
   echo "####### Installing GNS3" | tee -a $LOG_FILE
-  apt-get update -qq >> $LOG_FILE
-  apt-get upgrade -qq >> $LOG_FILE
-  apt-get install -qq $(cat packagelist) >> $LOG_FILE
   pip3 install -qq gns3-server==$GNS_VERS >> $LOG_FILE
   checkSuccess gns3server
 }
@@ -132,6 +138,7 @@ function configureGNS3()
 
 # Run the functions 
 checkRoot
+updatePackages
 installGNS3
 installDocker
 installDynamips
